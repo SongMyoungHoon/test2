@@ -1,0 +1,57 @@
+SET SESSION FOREIGN_KEY_CHECKS=0;
+
+/* Drop Tables */
+
+DROP TABLE IF EXISTS MASSAGE;
+DROP TABLE IF EXISTS COMMON;
+
+
+
+
+/* Create Tables */
+
+CREATE TABLE COMMON
+(
+	DATA_NO int unsigned NOT NULL AUTO_INCREMENT,
+	OCCDT varchar(8) NOT NULL,
+	OCCTM varchar(6) NOT NULL,
+	FORMNO varchar(4),
+	SPEED smallint,
+	CURRSTA varchar(3),
+	NEXTSTA varchar(3),
+	DISTANCE smallint,
+	YARD char(1),
+	MSC char(1),
+	AUTO char(1),
+	FA char(1),
+	SB char(1),
+	DESTSTA varchar(3),
+	TRAINNO varchar(4),
+	CARCOUNT tinyint,
+	PRIMARY KEY (DATA_NO),
+	UNIQUE (DATA_NO)
+);
+
+
+CREATE TABLE MASSAGE
+(
+	OCCDT varchar(8) NOT NULL,
+	OCCTM varchar(6) NOT NULL,
+	DATA longblob NOT NULL,
+	DATA_NO int unsigned NOT NULL,
+	UNIQUE (DATA_NO)
+);
+
+
+
+/* Create Foreign Keys */
+
+ALTER TABLE MASSAGE
+	ADD FOREIGN KEY (DATA_NO)
+	REFERENCES COMMON (DATA_NO)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+
